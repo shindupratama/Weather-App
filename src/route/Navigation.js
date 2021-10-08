@@ -7,7 +7,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const WeatherStack = createStackNavigator();
-const AppStack = createStackNavigator();
 
 class Navigation extends Component {
   constructor(props) {

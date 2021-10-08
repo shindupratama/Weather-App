@@ -102,23 +102,6 @@ export default class Weather extends Component {
     }
   }
 
-  // async getWeather(lat, lon) {
-  //   let api = new Api();
-  //   let data = await api.getWeather(lat, lon);
-  //   if(data) {
-  //     let result = data.data
-  //     console.log('hasil', result);
-  //     this.setState({
-  //       temperature: result.main.temp,
-  //       weather: result.weather[0].main,
-  //       weather_description: result.weather[0].description,
-  //       icon: result.weather[0].icon,
-  //       isLoading: false
-  //     });
-  //     dayname = new Date(result.dt * 1000).toLocaleDateString("en", {weekday: "long"});
-  //   }
-  // }
-
   getWeather(lat, lon) {
     let api = new Api();
     api.getWeather(lat, lon)
@@ -126,19 +109,6 @@ export default class Weather extends Component {
       weather_description: response.data.weather[0].description, icon: response.data.weather[0].icon, isLoading: false}); dayname = new Date(response.data.dt * 1000).toLocaleDateString("en", {weekday: "long"}); })
     .catch((error) => (console.log(error.response)));
   }
-
-  // async getForecast(lat, lon) {
-  //   let api = new Api();
-  //   let data = await api.getForecast(lat, lon);
-  //   if(data) {
-  //     let result = data.data;
-  //     this.setState({
-  //       city: result.city.name,
-  //       country: result.city.country,
-  //       isLoading: false
-  //     });
-  //   }
-  // }
 
   getForecast(lat, lon) {
     let api = new Api();
@@ -151,27 +121,6 @@ export default class Weather extends Component {
     .catch((error) => (console.log(error.response)));
   }
 
-  // async getOneCallApi(lat, lon) {
-  //   let api = new Api();
-  //   let data = await api.getOneCallApi(lat, lon);
-  //   if(data) {
-  //     let result = data.data
-  //     lists = result.daily;
-  //     for (let i = 0; i < lists; i++) {
-  //       console.log('date', lists[i].dt);
-  //       day = new Date(lists[i].dt * 1000).toLocaleDateString("en", {weekday: "long"});
-  //       // day = lists[i].dt;
-  //       temp = lists[i].main.temp;
-  //       tempIcon = lists[i].weather[0].icon;
-  //     }
-  //     this.setState({
-  //       temperature: result.main.temp,
-  //       weather: result.weather[0].main,
-  //       isLoading: false
-  //     });
-  //   }
-  // }
-
   getOneCallApi(lat, lon) {
     let api = new Api();
     api.getOneCallApi(lat, lon)
@@ -180,14 +129,13 @@ export default class Weather extends Component {
   }
 
   render() {
-    console.log('lists', this.state.lists)
     return (
       <View style={{flex: 1, backgroundColor: '#bf360c'}}>
         {this.state.isLoading ? <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <Text style={{fontSize: 24, color: '#fff'}}>Loading...</Text>
         </View> : <View>
         <View style={{marginTop: 15, marginLeft: 10}}>
-          <Text style={{fontSize: 24, fontWeight: 'bold', color: '#fff'}}>{`${this.state.city}, ${this.state.country}`}</Text>
+          <Text style={{fontSize: 24, fontWeight: 'bold', color: '#fff'}}>{this.state.city}</Text>
           <Text style={{fontSize: 40, fontWeight: 'bold', color: '#fff'}}>{dayname}</Text>
         </View>
         <View style={{justifyContent: 'center', alignItems: 'center', marginTop: 25}}>

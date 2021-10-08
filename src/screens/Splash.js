@@ -9,17 +9,6 @@ export default class Splash extends Component {
         titleMarginTop: new Animated.Value(height / 2)
     }
 
-    // componentDidMount() {
-    //     Animated.sequence([
-    //         Animated.timing(this.state.logoOpacity, {
-    //             toValue: 1,
-    //             duration: 4000
-    //         })
-    //     ]).start(() => {
-    //         this.props.navigation.navigate('Login'); 
-    //     });
-    // }
-
     componentDidMount() {
         Animated.sequence([
             Animated.timing(this.state.logoOpacity, {
@@ -38,7 +27,6 @@ export default class Splash extends Component {
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#bf360c'}}>
                 <StatusBar barStyle="dark-content" backgroundColor="#bf360c" />
                 <Animated.Image
-                    // style={{height: Dimensions.get('window').height, width: Dimensions.get('window').width, opacity: this.state.logoOpacity}}
                     style={{height: 200, width: 200, opacity: this.state.logoOpacity}}
                     source={require('../images/cloud.png')}
                 />
