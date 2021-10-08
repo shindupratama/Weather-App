@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Alert, FlatList, Image, Linking, PermissionsAndroid, Platform, StyleSheet, Text, ToastAndroid, View } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
+import moment from 'moment/min/moment-with-locales';
 import Api from '../api/Api';
 
 const hasPermissionIOS = async () => {
@@ -106,7 +107,7 @@ export default class Weather extends Component {
     let api = new Api();
     api.getWeather(lat, lon)
     .then((response) => { this.setState({temperature: response.data.main.temp, weather: response.data.weather[0].main,
-      weather_description: response.data.weather[0].description, icon: response.data.weather[0].icon, isLoading: false}); dayname = new Date(response.data.dt * 1000).toLocaleDateString("en", {weekday: "long"}); })
+      weather_description: response.data.weather[0].description, icon: response.data.weather[0].icon, isLoading: false}); dayname = moment(new Date(response.data.dt * 1000)).format('dddd'); })
     .catch((error) => (console.log(error.response)));
   }
 
@@ -130,18 +131,22 @@ export default class Weather extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: '#bf360c'}}>
+      <View style={{flex: 1, backgroundColor: '#4db6ac'}}>
         {this.state.isLoading ? <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Text style={{fontSize: 24, color: '#fff'}}>Loading...</Text>
+          <Image
+            style={{height: 100, width: 150, marginBottom: 10}}
+            source={require('../images/loading.png')}
+          />
+          <Text style={{fontSize: 24, color: '#fff'}}>Getting Weather Data...</Text>
         </View> : <View>
         <View style={{marginTop: 15, marginLeft: 10}}>
-          <Text style={{fontSize: 24, fontWeight: 'bold', color: '#fff'}}>{this.state.city}</Text>
-          <Text style={{fontSize: 40, fontWeight: 'bold', color: '#fff'}}>{dayname}</Text>
+          <Text style={{fontSize: 22, fontWeight: 'bold', color: '#fff'}}>{this.state.city}</Text>
+          <Text style={{fontSize: 34, fontWeight: 'bold', color: '#fff'}}>{dayname}</Text>
         </View>
         <View style={{justifyContent: 'center', alignItems: 'center', marginTop: 25}}>
-          <Text style={{fontSize: 20, fontWeight: 'bold', color: '#fff'}}>{this.state.weather}</Text>
-          <Text style={{fontSize: 20, fontWeight: 'bold', color: '#fff'}}>{this.state.weather_description}</Text>
-          <Text style={{fontSize: 34, fontWeight: 'bold', color: '#fff'}}>{`${this.state.temperature.toFixed(0)}°C`}</Text>
+          <Text style={{fontSize: 20, color: '#fff'}}>{this.state.weather}</Text>
+          <Text style={{fontSize: 20, color: '#fff'}}>{this.state.weather_description}</Text>
+          <Text style={{fontSize: 48, fontWeight: 'bold', color: '#fff'}}>{`${this.state.temperature.toFixed(0)}°C`}</Text>
         </View>
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
           <Image
@@ -154,12 +159,12 @@ export default class Weather extends Component {
             data={this.state.lists.slice(0, 3)}
             renderItem={({ item, index }) => (
               <View style={{flex: 1, flexDirection: 'row'}}>
-                <Text style={{fontSize: 24, color: '#fff'}}>{new Date(item.dt * 1000).toLocaleDateString("en", {weekday: "short"})}</Text>
+                <Text style={{fontSize: 24, color: '#fff'}}>{moment(new Date(item.dt * 1000)).format('dddd')}</Text>
                 <Image
                   style={{height: 40, width: 40}}
                   source={{uri: `https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}}
                 />
-                <Text style={{fontSize: 24, color: '#fff'}}>{`${item.temp.day.toFixed(0)}°C`}</Text>
+                <Text style={{fontSize: 28, fontWeight: 'bold', color: '#fff'}}>{`${item.temp.day.toFixed(0)}°C`}</Text>
               </View>
             )}
             keyExtractor={item => item.dt}

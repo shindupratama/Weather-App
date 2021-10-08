@@ -24,11 +24,11 @@ export default class Splash extends Component {
 
     render() {
         return (
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#bf360c'}}>
-                <StatusBar barStyle="dark-content" backgroundColor="#bf360c" />
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#4db6ac'}}>
+                <StatusBar barStyle="dark-content" backgroundColor="#4db6ac" />
                 <Animated.Image
                     style={{height: 200, width: 200, opacity: this.state.logoOpacity}}
-                    source={require('../images/cloud.png')}
+                    source={require('../images/moon.png')}
                 />
                 <Animated.Text style={{...style.title, marginTop: this.state.titleMarginTop}}>Weather App</Animated.Text>
             </View>

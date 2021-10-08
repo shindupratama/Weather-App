@@ -34,7 +34,7 @@ class Navigation extends Component {
     
     return (
       <NavigationContainer>
-        <StatusBar barStyle="dark-content" backgroundColor="#bf360c" />
+        <StatusBar barStyle="dark-content" backgroundColor="#4db6ac" />
         <WeatherStack.Navigator screenOptions={{ headerShown: false }}>
           <WeatherStack.Screen name="Weather" component={Weather} />
         </WeatherStack.Navigator>
